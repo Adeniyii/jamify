@@ -6,3 +6,19 @@
 	--sidebar-width: calc(250 / 16 * 1rem);
 	--footer-height: calc(100 / 16 * 1rem);
 }
+
+@layer base {
+	::-webkit-scrollbar {
+		width: 10px;
+		background-color: theme('colors.gray.900');
+	}
+	::-webkit-scrollbar-thumb {
+		border-radius: 1000px;
+		background-color: theme('colors.gray.500');
+		border: 2px solid theme('colors.gray.900');
+	}
+	html {
+		scrollbar-width: thin;
+		scrollbar-color: theme('colors.gray.500') theme('colors.gray.900');
+	}
+}
