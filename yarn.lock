@@ -299,6 +299,11 @@
   "resolved" "https://registry.npmjs.org/@prisma/engines/-/engines-3.13.0-17.efdf9b1183dddfd4258cd181a72125755215ab7b.tgz"
   "version" "3.13.0-17.efdf9b1183dddfd4258cd181a72125755215ab7b"
 
+"@prisma/prisma-fmt-wasm@3.13.0-17.efdf9b1183dddfd4258cd181a72125755215ab7b":
+  "integrity" "sha512-zCJfpPpH98YJMKbpygHHVqPrDRTO5WhUAgf8hZnUDCu/iWlgW9Zi9dzuFScml+Ns/Jr5XAl1lOTJXK/3IZu9NA=="
+  "resolved" "https://registry.npmjs.org/@prisma/prisma-fmt-wasm/-/prisma-fmt-wasm-3.13.0-17.efdf9b1183dddfd4258cd181a72125755215ab7b.tgz"
+  "version" "3.13.0-17.efdf9b1183dddfd4258cd181a72125755215ab7b"
+
 "@rushstack/eslint-patch@1.0.8":
   "integrity" "sha512-ZK5v4bJwgXldAUA8r3q9YKfCwOqoHTK/ZqRjSeRXQrBXWouoPnS4MQtgC4AXGiiBuUu5wxrRgTlv0ktmM4P1Aw=="
   "resolved" "https://registry.npmjs.org/@rushstack/eslint-patch/-/eslint-patch-1.0.8.tgz"
@@ -2445,7 +2450,14 @@
   dependencies:
     "fast-diff" "^1.1.2"
 
-"prettier@^2.4.1", "prettier@>=2.0.0":
+"prettier-plugin-prisma@^3.13.0":
+  "integrity" "sha512-wI5wVf1v5SIPaoqDVlnSK7VDAOn2mlgjbWqNYsXgjwh16367+u0g8l3r1YDxlQxCiSepCEPTtokQiCnZDin05A=="
+  "resolved" "https://registry.npmjs.org/prettier-plugin-prisma/-/prettier-plugin-prisma-3.13.0.tgz"
+  "version" "3.13.0"
+  dependencies:
+    "@prisma/prisma-fmt-wasm" "3.13.0-17.efdf9b1183dddfd4258cd181a72125755215ab7b"
+
+"prettier@^2.4.1", "prettier@>=2", "prettier@>=2.0.0":
   "integrity" "sha512-PkUpF+qoXTqhOeWL9fu7As8LXsIUZ1WYaJiY/a7McAQzxjk82OF0tibkFXVCDImZtWxbvojFjerkiLb0/q8mew=="
   "resolved" "https://registry.npmjs.org/prettier/-/prettier-2.6.2.tgz"
   "version" "2.6.2"
