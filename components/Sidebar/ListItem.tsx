@@ -17,11 +17,11 @@ const ListItem: FC<Props> = ({
   ...delegated
 }) => {
   return (
-    <li {...delegated}>
+    <li className="px-4" {...delegated}>
       <Link href={href} passHref>
         <a
           href="/home"
-          className="flex py-2 gap-3 text-sm items-center -mx-4 px-4 hover:bg-gray-800 rounded-sm"
+          className="flex py-2 gap-3 -mx-4 px-4 text-sm items-center hover:bg-gray-800 rounded-sm"
         >
           <Icon className={iconStyle} />
           <span>{label}</span>
