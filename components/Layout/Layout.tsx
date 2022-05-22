@@ -1,5 +1,4 @@
 import React from "react";
-import GradientLayout from "../GradientLayout";
 import Sidebar from "../Sidebar";
 
 const Layout = ({ children }) => {
@@ -8,19 +7,8 @@ const Layout = ({ children }) => {
       <aside className="row-span-1">
         <Sidebar />
       </aside>
-      <main className="row-span-1">
-        <GradientLayout
-          color=""
-          title=""
-          subTitle=""
-          image=""
-          desc=""
-          rounded={false}
-        >
-          {children}
-        </GradientLayout>
-      </main>
-      <footer className="col-span-2 bg-gray-900">Player</footer>
+      <main className="row-span-1">{children}</main>
+      <footer className="col-span-2 bg-gray-900 text-white">Player</footer>
     </div>
   );
 };
