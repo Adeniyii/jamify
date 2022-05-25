@@ -7,7 +7,7 @@ import PlaylistColumn from "./PlaylistColumn";
 
 const Sidebar = () => {
   return (
-    <div className="h-full py-7 flex flex-col text-white bg-black">
+    <div className="h-full py-7 flex flex-col text-white bg-[hsl(0deg,_0%,_5%)]">
       <span className="flex gap-2 items-center px-4 mb-7">
         <RiSpotifyLine className="w-8 h-8" />
         <span className="text-xl font-semibold">Spotify</span>
@@ -27,7 +27,7 @@ const Sidebar = () => {
           iconStyle="stroke-gray-400"
         />
       </ol>
-      <span className="w-full h-[1px] bg-gray-800" />
+      <span className="w-full h-[1px] bg-neutral-800" />
       <div className="h-full overflow-y-auto mt-7">
         <PlaylistColumn />
       </div>
