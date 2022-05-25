@@ -3,6 +3,11 @@ import jwt from "jsonwebtoken";
 import { User } from "@prisma/client";
 import prisma from "./prisma";
 
+export const validateToken = (token: string) => {
+  const { id }: any = jwt.verify(token, "hello");
+  return id;
+};
+
 export const validateRoute = (handler) => {
   return async (req: NextApiRequest, res: NextApiResponse) => {
     const token = req.cookies.SPOTIFY_ACCESS_TOKEN;
@@ -14,7 +19,7 @@ export const validateRoute = (handler) => {
     let user: User;
 
     try {
-      const { id }: any = jwt.verify(token, "hello");
+      const id = validateToken(token);
       user = await prisma.user.findUnique({ where: { id } });
 
       if (!user) throw new Error("Unauthorized request");

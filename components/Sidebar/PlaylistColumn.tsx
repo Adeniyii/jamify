@@ -14,7 +14,7 @@ const PlaylistColumn = () => {
           return (
             <ListItem
               key={p.id}
-              href={`/${p.name}`}
+              id={p.id}
               label={p.name}
               Icon={RiPlayList2Line}
               iconStyle="stroke-green-400"
