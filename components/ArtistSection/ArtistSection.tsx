@@ -12,7 +12,7 @@ const ArtistSection: FC<Props> = ({ artists }) => {
       <div className="flex justify-between">
         <div className="flex flex-col gap-1">
           <p className="font-semibold text-lg">Top artists this month</p>
-          <p className="text-sm">only visible to you</p>
+          <p className="text-xs text-neutral-400">Only visible to you</p>
         </div>
         <p>see all</p>
       </div>
