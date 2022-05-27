@@ -1,21 +1,23 @@
+/* eslint-disable react/require-default-props */
 import { IconType } from "react-icons";
 import React, { FC } from "react";
 import Link from "next/link";
 
 type Props = {
-  id: number;
+  id?: number;
   label: string;
   Icon: IconType;
   iconStyle: string;
+  href: string;
 };
 
-const ListItem: FC<Props> = ({ id, label, Icon, iconStyle, ...delegated }) => {
+const ListItem: FC<Props> = ({ id, label, Icon, iconStyle, href }) => {
   return (
-    <li className="px-4" {...delegated}>
+    <li className="px-4">
       <Link
         href={{
-          pathname: "/playlist/[id]",
-          query: { id },
+          pathname: href,
+          query: id ? { id } : undefined,
         }}
         passHref
       >

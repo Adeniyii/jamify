@@ -6,7 +6,7 @@ const PrimaryNav = () => {
   return (
     <ol className="flex flex-col gap-3">
       <ListItem
-        href="/home"
+        href="/"
         label="Home"
         Icon={IoHomeOutline}
         iconStyle="stroke-gray-400"

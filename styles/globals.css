@@ -5,6 +5,8 @@
 :root {
 	--sidebar-width: calc(250 / 16 * 1rem);
 	--footer-height: calc(100 / 16 * 1rem);
+	--page-color: 0deg;
+	--page-color-saturation: 0%;
 }
 
 @layer base {
@@ -21,4 +23,12 @@
 		scrollbar-width: thin;
 		scrollbar-color: theme('colors.neutral.500') theme('colors.neutral.900');
 	}
+}
+
+.page-gradient {
+	background: linear-gradient(hsl(var(--page-color),var(--page-color-saturation),15%), hsl(var(--page-color),var(--page-color-saturation),10%) 40%, hsl(var(--page-color), var(--page-color-saturation), 5%), hsl(0deg, 0%, .95%) 75%);
+}
+
+.page-solid {
+	background: linear-gradient(hsl(var(--page-color), var(--page-color-saturation), 30%), hsl(var(--page-color), var(--page-color-saturation), 15%))
 }

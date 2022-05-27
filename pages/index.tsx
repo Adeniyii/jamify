@@ -6,8 +6,8 @@ import prisma from "../lib/prisma";
 
 const Home = ({ artists }) => {
   const artistObj = JSON.parse(artists);
-  const { user } = useMe();
   const { data } = usePlaylist();
+  const { user } = useMe();
 
   return (
     <GradientLayout
@@ -15,8 +15,6 @@ const Home = ({ artists }) => {
       subTitle="profile"
       image="/images/papi.jpg"
       desc={`${data?.playlists?.length ?? "-"} public playlists`}
-      bg="[background-image:linear-gradient(hsl(0deg,_0%,_30%),_hsl(0deg,_0%,_15%))]"
-      gradient="[background-image:linear-gradient(hsl(0deg,_0%,_13%),_hsl(0deg,_0%,_11%)_40%,_hsl(0deg,_0%,_5%),_hsl(0deg,_0%,_.95%)_75%)]"
       rounded
     >
       <Head>
