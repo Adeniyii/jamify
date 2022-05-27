@@ -21,18 +21,20 @@ const GradientLayout: FC<Props> = ({
   style,
 }) => {
   return (
-    <div className="h-full page-gradient" style={style}>
-      <div className="p-5 page-solid overflow-hidden shadow-sm">
+    <div className="h-full page-gradient text-white" style={style}>
+      <div className="p-6 page-solid overflow-hidden">
         <div className="flex items-end [filter:_drop-shadow(4px_-8px_24px_hsl(0deg_0%_0%_/_.6))]">
           <div
-            className={`p-5 w-[160px] h-[160px] object-contain relative overflow-hidden ${
+            className={`px-6 w-[180px] h-[180px] object-contain relative overflow-hidden ${
               rounded ? "rounded-full" : "rounded"
             }`}
           >
             <Image src={image} layout="fill" />
           </div>
-          <div className="p-5 text-white">
-            <p className="text-[0.6rem] font-medium uppercase">{subTitle}</p>
+          <div className="px-5">
+            <p className="text-[0.6rem] tracking-widest font-medium uppercase">
+              {subTitle}
+            </p>
             <p className="text-6xl font-bold capitalize mt-1">{title}</p>
             <p className="text-xs text-neutral-400 font-normal mt-2">{desc}</p>
           </div>

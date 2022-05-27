@@ -4,7 +4,7 @@ import ListItem from "./ListItem";
 
 const PrimaryNav = () => {
   return (
-    <ol className="flex flex-col gap-3">
+    <ol className="flex flex-col">
       <ListItem
         href="/"
         label="Home"

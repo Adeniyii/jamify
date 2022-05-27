@@ -8,21 +8,23 @@ const PlaylistColumn = () => {
   const playlists = data?.playlists ?? [];
 
   return (
-    <ol className="flex flex-col gap-3 h-2">
-      {playlists &&
-        playlists.map((p: Playlist) => {
-          return (
-            <ListItem
-              key={p.id}
-              id={p.id}
-              href="/playlist/[id]"
-              label={p.name}
-              Icon={RiPlayList2Line}
-              iconStyle="stroke-green-400"
-            />
-          );
-        })}
-    </ol>
+    <div className="overflow-y-auto h-full">
+      <ol className="flex flex-col gap-1 h-0">
+        {playlists &&
+          playlists.map((p: Playlist) => {
+            return (
+              <ListItem
+                key={p.id}
+                id={p.id}
+                href="/playlist/[id]"
+                label={p.name}
+                Icon={RiPlayList2Line}
+                iconStyle="stroke-green-400"
+              />
+            );
+          })}
+      </ol>
+    </div>
   );
 };
 
