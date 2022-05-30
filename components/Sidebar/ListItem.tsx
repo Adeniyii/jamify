@@ -6,8 +6,8 @@ import Link from "next/link";
 type Props = {
   id?: number;
   label: string;
-  Icon: IconType;
-  iconStyle: string;
+  Icon?: IconType;
+  iconStyle?: string;
   href: string;
 };
 
@@ -23,9 +23,9 @@ const ListItem: FC<Props> = ({ id, label, Icon, iconStyle, href }) => {
       >
         <a
           href="/home"
-          className="flex py-2 gap-3 -mx-4 px-4 text-sm items-center hover:bg-neutral-800 rounded-sm"
+          className="flex py-2 gap-3 -mx-4 px-4 text-xs items-center hover:bg-neutral-800 rounded-sm"
         >
-          <Icon className={iconStyle} />
+          {Icon && <Icon className={`h-5 w-5 ${iconStyle}`} />}
           <span>{label}</span>
         </a>
       </Link>

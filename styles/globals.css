@@ -7,21 +7,26 @@
 	--footer-height: calc(100 / 16 * 1rem);
 	--page-color: 0deg;
 	--page-color-saturation: 0%;
+	--sidebar-bg: hsl(0deg, 0%, 5%);
 }
 
 @layer base {
 	::-webkit-scrollbar {
-		width: 10px;
-		background-color: theme('colors.neutral.900');
+		width: 8px;
+		background-color: var(--sidebar-bg);
 	}
 	::-webkit-scrollbar-thumb {
 		border-radius: 1000px;
 		background-color: theme('colors.neutral.500');
-		border: 2px solid theme('colors.neutral.900');
+		border: 2px solid var(--sidebar-bg);
 	}
 	html {
 		scrollbar-width: thin;
-		scrollbar-color: theme('colors.neutral.500') theme('colors.neutral.900');
+		scrollbar-color: theme('colors.neutral.500') var(--sidebar-bg);
+	}
+	th {
+		font-weight: theme('fontWeight.medium');
+		text-align: left;
 	}
 }
 

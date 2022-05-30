@@ -1,5 +1,4 @@
 import { Playlist } from "@prisma/client";
-import { RiPlayList2Line } from "react-icons/ri";
 import { usePlaylist } from "../../lib/hooks";
 import ListItem from "./ListItem";
 
@@ -18,8 +17,6 @@ const PlaylistColumn = () => {
                 id={p.id}
                 href="/playlist/[id]"
                 label={p.name}
-                Icon={RiPlayList2Line}
-                iconStyle="stroke-green-400"
               />
             );
           })}
