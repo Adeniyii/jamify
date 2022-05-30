@@ -88,7 +88,18 @@ export const getServerSideProps: GetServerSideProps = async ({
   params: { id },
   req,
 }) => {
-  const userId = validateToken(req.cookies.SPOTIFY_ACCESS_TOKEN);
+  let userId;
+
+  try {
+    userId = validateToken(req.cookies.SPOTIFY_ACCESS_TOKEN);
+  } catch (e) {
+    return {
+      redirect: {
+        destination: "/signin",
+        permanent: false,
+      },
+    };
+  }
 
   const playlist = await prisma.playlist.findFirst({
     where: {
