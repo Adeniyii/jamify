@@ -31,7 +31,7 @@
 }
 
 .page-gradient {
-	background: linear-gradient(hsl(var(--page-color),var(--page-color-saturation),15%), hsl(var(--page-color),var(--page-color-saturation),10%) 40%, hsl(var(--page-color), var(--page-color-saturation), 5%), hsl(0deg, 0%, .95%) 75%);
+	background: linear-gradient(hsl(var(--page-color),var(--page-color-saturation),30%), hsl(var(--page-color),var(--page-color-saturation),10%) 40%, hsl(var(--page-color), var(--page-color-saturation), 5%), hsl(0deg, 0%, .95%) 75%);
 }
 
 .page-solid {

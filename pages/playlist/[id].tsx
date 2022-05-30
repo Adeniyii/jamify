@@ -66,7 +66,10 @@ const index: FC<Props> = ({ playlist }) => {
           <tbody>
             {playlistObj.songs.map((song: Song, i: number) => {
               return (
-                <tr key={song.id}>
+                <tr
+                  key={song.id}
+                  className="hover:[background:_rgba(255,_255,_255,_0.1)] hover:cursor-pointer"
+                >
                   <td className="py-5">{i + 1}</td>
                   <td>{song.name}</td>
                   <td>{formatDate(new Date(song.createdAt))}</td>
@@ -86,11 +89,10 @@ export const getServerSideProps: GetServerSideProps = async ({
   req,
 }) => {
   const userId = validateToken(req.cookies.SPOTIFY_ACCESS_TOKEN);
-  const playlistId = +id;
 
   const playlist = await prisma.playlist.findFirst({
     where: {
-      id: playlistId,
+      id: +id,
       userId,
     },
     include: {
