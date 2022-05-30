@@ -7,7 +7,7 @@ const Layout = ({ children }) => {
       <aside className="row-span-1 bg-black">
         <Sidebar />
       </aside>
-      <main className="row-span-1 overflow-y-auto">{children}</main>
+      <main className="row-span-1">{children}</main>
       <footer className="col-span-2 border-neutral-900 border-t"> </footer>
     </div>
   );

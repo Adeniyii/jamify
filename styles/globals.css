@@ -13,16 +13,16 @@
 @layer base {
 	::-webkit-scrollbar {
 		width: 8px;
-		background-color: var(--sidebar-bg);
+		background-color: transparent;
 	}
 	::-webkit-scrollbar-thumb {
 		border-radius: 1000px;
 		background-color: theme('colors.neutral.500');
-		border: 2px solid var(--sidebar-bg);
+		border: 2px solid theme('colors.neutral.900');
 	}
 	html {
 		scrollbar-width: thin;
-		scrollbar-color: theme('colors.neutral.500') var(--sidebar-bg);
+		scrollbar-color: theme('colors.neutral.500') transparent;
 	}
 	th {
 		font-weight: theme('fontWeight.medium');

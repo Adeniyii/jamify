@@ -5,6 +5,7 @@ import React, { FC } from "react";
 import { BsFillHeartFill, BsFillPlayFill, BsClock } from "react-icons/bs";
 import GradientLayout from "../../components/GradientLayout";
 import { validateToken } from "../../lib/auth";
+import { formatDate, formatTime } from "../../lib/formatters";
 import prisma from "../../lib/prisma";
 
 const colors = [
@@ -68,8 +69,8 @@ const index: FC<Props> = ({ playlist }) => {
                 <tr key={song.id}>
                   <td className="py-5">{i + 1}</td>
                   <td>{song.name}</td>
-                  <td>{song.createdAt}</td>
-                  <td>{song.duration}</td>
+                  <td>{formatDate(new Date(song.createdAt))}</td>
+                  <td>{formatTime(song.duration)}</td>
                 </tr>
               );
             })}
