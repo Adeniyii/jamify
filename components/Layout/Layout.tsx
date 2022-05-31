@@ -1,4 +1,5 @@
 import React from "react";
+import Footer from "../Footer";
 import Sidebar from "../Sidebar";
 
 const Layout = ({ children }) => {
@@ -8,7 +9,9 @@ const Layout = ({ children }) => {
         <Sidebar />
       </aside>
       <main className="row-span-1">{children}</main>
-      <footer className="col-span-2 border-neutral-900 border-t"> </footer>
+      <footer className="col-span-2 border-neutral-900 border-t px-5">
+        <Footer />
+      </footer>
     </div>
   );
 };
