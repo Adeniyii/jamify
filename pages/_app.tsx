@@ -1,10 +1,12 @@
 /* eslint-disable react/jsx-no-useless-fragment */
+import { StoreProvider } from "easy-peasy";
 import Layout from "../components/Layout";
+import { store } from "../lib/store";
 import "../styles/globals.css";
 
 const MyApp = ({ Component, pageProps }) => {
   return (
-    <>
+    <StoreProvider store={store}>
       {Component.authPage ? (
         <Component {...pageProps} />
       ) : (
@@ -12,7 +14,7 @@ const MyApp = ({ Component, pageProps }) => {
           <Component {...pageProps} />
         </Layout>
       )}
-    </>
+    </StoreProvider>
   );
 };
 
