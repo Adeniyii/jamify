@@ -9,19 +9,19 @@ const PrimaryNav = () => {
         href="/"
         label="Home"
         Icon={IoHomeOutline}
-        iconStyle="stroke-gray-400"
+        iconStyle="stroke-neutral-300"
       />
       <ListItem
         href="/search"
         label="Search"
         Icon={IoSearchOutline}
-        iconStyle="stroke-gray-400"
+        iconStyle="stroke-neutral-300"
       />
       <ListItem
         href="/library"
-        label="Library"
+        label="Your Library"
         Icon={BiLibrary}
-        iconStyle="fill-gray-400"
+        iconStyle="fill-neutral-300"
       />
     </ol>
   );

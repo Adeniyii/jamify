@@ -24,7 +24,7 @@ const Sidebar = () => {
           href="/liked"
           label="Liked Songs"
           Icon={FcLike}
-          iconStyle="stroke-gray-400"
+          iconStyle="stroke-neutral-300"
         />
       </ol>
       <span className="w-full h-[1px] bg-neutral-800" />

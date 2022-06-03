@@ -25,6 +25,7 @@
     "react-dom": "18.1.0",
     "react-howler": "^5.2.0",
     "react-icons": "^4.3.1",
+    "react-range": "^1.8.12",
     "reset-css": "^5.0.1",
     "swr": "^1.1.1"
   },

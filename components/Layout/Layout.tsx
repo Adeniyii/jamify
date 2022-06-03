@@ -9,7 +9,7 @@ const Layout = ({ children }) => {
         <Sidebar />
       </aside>
       <main className="row-span-1">{children}</main>
-      <footer className="col-span-2 border-neutral-900 border-t px-5">
+      <footer className="col-span-2 border-neutral-900 border-t px-5 py-4">
         <Footer />
       </footer>
     </div>
