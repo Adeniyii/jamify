@@ -18,36 +18,52 @@ interface Iprops {
 
 const Player: FC<Iprops> = ({ activeSong }) => {
   const [playing, setPlaying] = useState(true);
+  const [shuffle, setShuffle] = useState(false);
+  const [repeat, setRepeat] = useState(false);
 
   const setPlayState = (value: boolean) => {
     if (typeof value !== "boolean") return;
     setPlaying(value);
+  };
+  const toggleShuffle = () => {
+    setShuffle((prev) => !prev);
+  };
+  const toggleRepeat = () => {
+    setRepeat((prev) => !prev);
   };
 
   return (
     <div className="w-[500px] h-full flex flex-col justify-between">
       {/* <ReactHowler playing={playing} src={activeSong?.url} /> */}
       <div className="flex items-center justify-center gap-4">
-        <button type="button" className="mr-2">
-          <MdShuffle className="text-neutral-700 text-sm" />
+        <button type="button" className="mr-2" onClick={() => toggleShuffle()}>
+          <MdShuffle
+            className={`text-base ${
+              shuffle ? "text-green-500 opacity-90" : "text-white opacity-60"
+            } hover:opacity-100`}
+          />
         </button>
         <button type="button">
-          <MdSkipPrevious className="text-neutral-400 text-base" />
+          <MdSkipPrevious className="text-white opacity-60 text-xl hover:opacity-100" />
         </button>
         {playing ? (
           <button type="button" onClick={() => setPlayState(false)}>
-            <MdOutlinePauseCircleFilled className="text-4xl" />
+            <MdOutlinePauseCircleFilled className="text-4xl hover:scale-110 transition-transform" />
           </button>
         ) : (
           <button type="button" onClick={() => setPlayState(true)}>
-            <MdOutlinePlayCircleFilled className="text-4xl" />
+            <MdOutlinePlayCircleFilled className="text-4xl hover:scale-110 transition-transform" />
           </button>
         )}
         <button type="button">
-          <MdSkipNext className="text-neutral-400 text-base" />
+          <MdSkipNext className="text-white opacity-60 text-xl hover:opacity-100" />
         </button>
-        <button type="button" className="ml-2">
-          <MdOutlineRepeat className="text-neutral-700 text-sm" />
+        <button type="button" className="ml-2" onClick={() => toggleRepeat()}>
+          <MdOutlineRepeat
+            className={`text-base ${
+              repeat ? "text-green-500 opacity-90" : "text-white opacity-60"
+            } hover:opacity-100`}
+          />
         </button>
       </div>
       <div className="flex gap-4 items-center">

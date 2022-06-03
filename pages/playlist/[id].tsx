@@ -46,7 +46,7 @@ const index: FC<Props> = ({ playlist }) => {
       <div>
         <div className="mb-5 flex items-center gap-8">
           <button type="button" className="">
-            <BsFillPlayFill className="bg-green-600 w-12 h-12 p-2 rounded-[100%]" />
+            <BsFillPlayFill className="bg-green-600 w-12 h-12 p-2 rounded-[100%] text-neutral-900" />
           </button>
           <button type="button" className="">
             <BsFillHeartFill className="text-green-600 w-6 h-6" />
