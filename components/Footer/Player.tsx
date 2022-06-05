@@ -9,6 +9,9 @@ import {
 import ReactHowler from "react-howler";
 import { useEffect, useRef, useState, FC } from "react";
 import { Song } from "@prisma/client";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "lib/store";
+import { togglePlay } from "lib/activeSongSlice";
 import Slider from "./Slider";
 
 interface IProps {
@@ -17,13 +20,15 @@ interface IProps {
 }
 
 const Player: FC<IProps> = ({ activeSong }) => {
-  const [playing, setPlaying] = useState(false);
   const [shuffle, setShuffle] = useState(false);
   const [repeat, setRepeat] = useState(false);
 
+  const { isPlaying } = useSelector((state: RootState) => state.song);
+  const dispatch = useDispatch();
+
   const setPlayState = (value: boolean) => {
     if (typeof value !== "boolean") return;
-    setPlaying(value);
+    dispatch(togglePlay());
   };
   const toggleShuffle = () => {
     setShuffle((prev) => !prev);
@@ -34,7 +39,7 @@ const Player: FC<IProps> = ({ activeSong }) => {
 
   return (
     <div className="w-[500px] h-full flex flex-col justify-between">
-      <ReactHowler playing={playing} src={activeSong?.url} />
+      <ReactHowler playing={isPlaying} src={activeSong?.url} />
       <div className="flex items-center justify-center gap-4">
         <button type="button" className="mr-2" onClick={() => toggleShuffle()}>
           <MdShuffle
@@ -46,7 +51,7 @@ const Player: FC<IProps> = ({ activeSong }) => {
         <button type="button">
           <MdSkipPrevious className="text-white opacity-60 text-xl hover:opacity-100" />
         </button>
-        {playing ? (
+        {isPlaying ? (
           <button type="button" onClick={() => setPlayState(false)}>
             <MdOutlinePauseCircleFilled className="text-4xl hover:scale-110 transition-transform" />
           </button>

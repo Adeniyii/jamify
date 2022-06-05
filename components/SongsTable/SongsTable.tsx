@@ -1,9 +1,19 @@
 import { Song } from "@prisma/client";
 import React, { FC } from "react";
-import { BsClock, BsFillHeartFill, BsFillPlayFill } from "react-icons/bs";
+import {
+  BsClock,
+  BsFillHeartFill,
+  BsFillPlayFill,
+  BsFillPauseFill,
+} from "react-icons/bs";
 import { formatDate, formatTime } from "lib/formatters";
-import { useDispatch } from "react-redux";
-import { changeActiveSong, changeActiveSongs } from "lib/activeSongSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  changeActiveSong,
+  changeActiveSongs,
+  togglePlay,
+} from "lib/activeSongSlice";
+import { RootState } from "lib/store";
 
 interface IProps {
   songs: Song[];
@@ -11,18 +21,31 @@ interface IProps {
 
 const SongsTable: FC<IProps> = ({ songs }) => {
   const dispatch = useDispatch();
+  const { isPlaying } = useSelector((state: RootState) => state.song);
 
   const handlePlay = (song?) => {
     dispatch(changeActiveSong(song || songs[0]));
     dispatch(changeActiveSongs(songs));
+    if (!isPlaying) dispatch(togglePlay());
+  };
+
+  const handlePause = () => {
+    dispatch(togglePlay());
   };
 
   return (
     <>
       <div className="mb-5 flex items-center gap-8">
-        <button type="button" className="" onClick={() => handlePlay()}>
-          <BsFillPlayFill className="bg-green-600 w-12 h-12 p-2 rounded-[100%] text-neutral-900" />
-        </button>
+        {isPlaying ? (
+          <button type="button" className="" onClick={() => handlePause()}>
+            <BsFillPauseFill className="bg-green-600 w-12 h-12 p-2 rounded-[100%] text-neutral-900" />
+          </button>
+        ) : (
+          <button type="button" className="" onClick={() => handlePlay()}>
+            <BsFillPlayFill className="bg-green-600 w-12 h-12 p-2 rounded-[100%] text-neutral-900" />
+          </button>
+        )}
+
         <button type="button" className="">
           <BsFillHeartFill className="text-green-600 w-6 h-6" />
         </button>
