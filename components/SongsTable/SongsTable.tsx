@@ -2,23 +2,19 @@ import { Song } from "@prisma/client";
 import React, { FC } from "react";
 import { BsClock, BsFillHeartFill, BsFillPlayFill } from "react-icons/bs";
 import { formatDate, formatTime } from "lib/formatters";
-import { useStoreActions } from "easy-peasy";
+import { useDispatch } from "react-redux";
+import { changeActiveSong, changeActiveSongs } from "lib/activeSongSlice";
 
 interface IProps {
   songs: Song[];
 }
 
 const SongsTable: FC<IProps> = ({ songs }) => {
-  const changeActiveSong = useStoreActions(
-    (store: any) => store.changeActiveSong
-  );
-  const changeActiveSongs = useStoreActions(
-    (store: any) => store.changeActiveSongs
-  );
+  const dispatch = useDispatch();
 
   const handlePlay = (song?) => {
-    changeActiveSong(song || songs[0]);
-    changeActiveSongs(songs);
+    dispatch(changeActiveSong(song || songs[0]));
+    dispatch(changeActiveSongs(songs));
   };
 
   return (

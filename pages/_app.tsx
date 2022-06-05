@@ -1,12 +1,12 @@
 /* eslint-disable react/jsx-no-useless-fragment */
-import { StoreProvider } from "easy-peasy";
 import { store } from "lib/store";
+import { Provider } from "react-redux";
 import Layout from "components/Layout";
 import "../styles/globals.css";
 
 const MyApp = ({ Component, pageProps }) => {
   return (
-    <StoreProvider store={store}>
+    <Provider store={store}>
       {Component.authPage ? (
         <Component {...pageProps} />
       ) : (
@@ -14,7 +14,7 @@ const MyApp = ({ Component, pageProps }) => {
           <Component {...pageProps} />
         </Layout>
       )}
-    </StoreProvider>
+    </Provider>
   );
 };
 

@@ -1,10 +1,12 @@
-import { useStoreState } from "easy-peasy";
+import { useSelector } from "react-redux";
 import React, { useState } from "react";
+import { RootState } from "lib/store";
 import Player from "./Player";
 
 const Footer = () => {
-  const activeSong = useStoreState((store: any) => store.activeSong);
-  const activeSongs = useStoreState((store: any) => store.activeSongs);
+  const { activeSong } = useSelector((store: RootState) => store.song);
+  const { activeSongs } = useSelector((store: RootState) => store.song);
+  // const activeSongs = useSelector((store: RootState) => store.activeSongs);
   const [dum, setDum] = useState(0);
 
   return (
@@ -19,6 +21,6 @@ const Footer = () => {
       <div className="grow flex justify-end">misc</div>
     </div>
   );
-};
+};;
 
 export default Footer;
