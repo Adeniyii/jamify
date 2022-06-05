@@ -1,26 +1,12 @@
-import { Song } from "@prisma/client";
-import { createStore, action, Action, createTypedHooks } from "easy-peasy";
+import { createStore, action } from "easy-peasy";
 
-interface IStore {
-  activeSongs: Song[];
-  activeSong: Song;
-  changeActiveSongs: Action<IStore, Song[]>;
-  changeActiveSong: Action<IStore, Song>;
-}
-
-export const store = createStore<IStore>({
+export const store = createStore({
   activeSongs: [],
   activeSong: null,
-  changeActiveSongs: action((state, payload) => {
+  changeActiveSongs: action((state: any, payload) => {
     state.activeSongs = payload;
   }),
-  changeActiveSong: action((state, payload) => {
+  changeActiveSong: action((state: any, payload) => {
     state.activeSong = payload;
   }),
 });
-
-const typedHooks = createTypedHooks<IStore>();
-
-export const { useStoreActions } = typedHooks;
-export const { useStoreDispatch } = typedHooks;
-export const { useStoreState } = typedHooks;

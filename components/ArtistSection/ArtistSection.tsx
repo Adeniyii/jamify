@@ -19,7 +19,7 @@ const ArtistSection: FC<Props> = ({ artists }) => {
       <ul className="flex gap-4 mt-8">
         {artists.map((artist) => {
           return (
-            <li className="bg-[hsl(0deg,_0%,_8%)] p-4 rounded">
+            <li className="bg-[hsl(0deg,_0%,_8%)] p-4 rounded" key={artist.id}>
               <div className="p-5 h-[100px] w-[100px] object-contain relative overflow-hidden rounded-[100%]">
                 <Image src="/images/papi.jpg" layout="fill" />
               </div>

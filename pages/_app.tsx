@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-no-useless-fragment */
 import { StoreProvider } from "easy-peasy";
-import Layout from "../components/Layout";
-import { store } from "../lib/store";
+import { store } from "lib/store";
+import Layout from "components/Layout";
 import "../styles/globals.css";
 
 const MyApp = ({ Component, pageProps }) => {

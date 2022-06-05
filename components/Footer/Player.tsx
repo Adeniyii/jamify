@@ -7,17 +7,17 @@ import {
   MdOutlineRepeat,
 } from "react-icons/md";
 import ReactHowler from "react-howler";
-import { FC, useEffect, useRef, useState } from "react";
-import { useStoreActions } from "easy-peasy";
+import { useEffect, useRef, useState, FC } from "react";
 import { Song } from "@prisma/client";
 import Slider from "./Slider";
 
-interface Iprops {
+interface IProps {
   activeSong: Song;
+  activeSongs: Song[];
 }
 
-const Player: FC<Iprops> = ({ activeSong }) => {
-  const [playing, setPlaying] = useState(true);
+const Player: FC<IProps> = ({ activeSong }) => {
+  const [playing, setPlaying] = useState(false);
   const [shuffle, setShuffle] = useState(false);
   const [repeat, setRepeat] = useState(false);
 
@@ -34,7 +34,7 @@ const Player: FC<Iprops> = ({ activeSong }) => {
 
   return (
     <div className="w-[500px] h-full flex flex-col justify-between">
-      {/* <ReactHowler playing={playing} src={activeSong?.url} /> */}
+      <ReactHowler playing={playing} src={activeSong?.url} />
       <div className="flex items-center justify-center gap-4">
         <button type="button" className="mr-2" onClick={() => toggleShuffle()}>
           <MdShuffle
