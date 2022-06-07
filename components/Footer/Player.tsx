@@ -16,14 +16,15 @@ import Slider from "./Slider";
 
 interface IProps {
   activeSong: Song;
-  activeSongs: Song[];
 }
 
 const Player: FC<IProps> = ({ activeSong }) => {
   const [shuffle, setShuffle] = useState(false);
   const [repeat, setRepeat] = useState(false);
 
-  const { isPlaying } = useSelector((state: RootState) => state.song);
+  const { isPlaying, activePlaylist } = useSelector(
+    (state: RootState) => state.song
+  );
   const dispatch = useDispatch();
 
   const setPlayState = (value: boolean) => {

@@ -1,5 +1,6 @@
-import { Song } from "@prisma/client";
+/* eslint-disable react/require-default-props */
 import React, { FC } from "react";
+import { Song } from "@prisma/client";
 import {
   BsClock,
   BsFillHeartFill,
@@ -7,36 +8,28 @@ import {
   BsFillPauseFill,
 } from "react-icons/bs";
 import { formatDate, formatTime } from "lib/formatters";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  changeActiveSong,
-  changeActiveSongs,
-  togglePlay,
-} from "lib/activeSongSlice";
-import { RootState } from "lib/store";
+import { IPlaylist } from "lib/interfaces";
+import useControls from "hooks/useControls";
 
 interface IProps {
-  songs: Song[];
+  playlist: IPlaylist;
 }
 
-const SongsTable: FC<IProps> = ({ songs }) => {
-  const dispatch = useDispatch();
-  const { isPlaying } = useSelector((state: RootState) => state.song);
+const SongsTable: FC<IProps> = ({ playlist }) => {
+  const { songs } = playlist;
 
-  const handlePlay = (song?) => {
-    dispatch(changeActiveSong(song || songs[0]));
-    dispatch(changeActiveSongs(songs));
-    if (!isPlaying) dispatch(togglePlay());
-  };
-
-  const handlePause = () => {
-    dispatch(togglePlay());
-  };
+  const {
+    activePlaylist,
+    isPlaying,
+    isCurrentPlaylist,
+    handlePause,
+    handlePlay,
+  } = useControls(playlist);
 
   return (
     <>
       <div className="mb-5 flex items-center gap-8">
-        {isPlaying ? (
+        {isPlaying && isCurrentPlaylist(activePlaylist, playlist) ? (
           <button type="button" className="" onClick={() => handlePause()}>
             <BsFillPauseFill className="bg-green-600 w-12 h-12 p-2 rounded-[100%] text-neutral-900" />
           </button>

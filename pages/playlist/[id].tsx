@@ -24,6 +24,7 @@ type Props = {
 
 const index: FC<Props> = ({ playlist }) => {
   const playlistObj = JSON.parse(playlist);
+  // console.log(playlistObj);
 
   return (
     <GradientLayout
@@ -40,7 +41,7 @@ const index: FC<Props> = ({ playlist }) => {
         "--page-color-saturation": "50%",
       }}
     >
-      <SongsTable songs={playlistObj.songs} />
+      <SongsTable playlist={playlistObj} />
     </GradientLayout>
   );
 };
