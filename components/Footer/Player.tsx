@@ -12,6 +12,7 @@ import { Song } from "@prisma/client";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "lib/store";
 import { togglePlay } from "lib/activeSongSlice";
+import { formatTime } from "lib/formatters";
 import Slider from "./Slider";
 
 interface IProps {
@@ -22,8 +23,10 @@ const Player: FC<IProps> = ({ activeSong }) => {
   const [shuffle, setShuffle] = useState(false);
   const [repeat, setRepeat] = useState(false);
   const [index, setIndex] = useState(0);
+  const [seek, setSeek] = useState(0);
+  const [duration, setDuration] = useState(0.01);
 
-  const soundRef = useRef();
+  const soundRef = useRef<ReactHowler>();
 
   const dispatch = useDispatch();
   const { isPlaying, activePlaylist } = useSelector(
@@ -58,9 +61,32 @@ const Player: FC<IProps> = ({ activeSong }) => {
     }
   };
 
+  const onEnd = () => {
+    if (repeat) {
+      setSeek(soundRef.current.seek(0));
+      return;
+    }
+    setNextSong();
+  };
+
+  const onLoad = () => {
+    setDuration(soundRef.current.duration());
+  };
+
+  const onSeek = (values: number[]) => {
+    setSeek(values[0]);
+    soundRef.current.seek(values[0]);
+  };
+
   return (
     <div className="w-[500px] h-full flex flex-col justify-between">
-      <ReactHowler playing={isPlaying} src={activeSong?.url} ref={soundRef} />
+      <ReactHowler
+        playing={isPlaying}
+        src={activeSong?.url}
+        ref={soundRef}
+        onEnd={onEnd}
+        onLoad={onLoad}
+      />
       <div className="flex items-center justify-center gap-4">
         <button type="button" className="mr-2" onClick={() => toggleShuffle()}>
           <MdShuffle
@@ -94,8 +120,8 @@ const Player: FC<IProps> = ({ activeSong }) => {
       </div>
       <div className="flex gap-4 items-center">
         <p className="text-xs">1:12</p>
-        <Slider />
-        <p className="text-xs">1:12</p>
+        <Slider max={duration ?? 0.01} onSeek={onSeek} seek={seek} />
+        <p className="text-xs">{formatTime(duration)}</p>
       </div>
     </div>
   );
