@@ -21,26 +21,46 @@ interface IProps {
 const Player: FC<IProps> = ({ activeSong }) => {
   const [shuffle, setShuffle] = useState(false);
   const [repeat, setRepeat] = useState(false);
+  const [index, setIndex] = useState(0);
 
+  const soundRef = useRef();
+
+  const dispatch = useDispatch();
   const { isPlaying, activePlaylist } = useSelector(
     (state: RootState) => state.song
   );
-  const dispatch = useDispatch();
+
+  const { songs } = activePlaylist;
 
   const setPlayState = (value: boolean) => {
     if (typeof value !== "boolean") return;
     dispatch(togglePlay());
   };
+
   const toggleShuffle = () => {
     setShuffle((prev) => !prev);
   };
+
   const toggleRepeat = () => {
     setRepeat((prev) => !prev);
   };
 
+  const setPrevSong = () => {
+    setIndex((i) => (i ? i - 1 : songs.length - 1));
+  };
+
+  const setNextSong = () => {
+    if (shuffle) {
+      const next = Math.floor(Math.random() * songs.length);
+      setIndex((i) => (i === next ? (next + 1) % songs.length : next));
+    } else {
+      setIndex((i) => (i === songs.length - 1 ? 0 : i + 1));
+    }
+  };
+
   return (
     <div className="w-[500px] h-full flex flex-col justify-between">
-      <ReactHowler playing={isPlaying} src={activeSong?.url} />
+      <ReactHowler playing={isPlaying} src={activeSong?.url} ref={soundRef} />
       <div className="flex items-center justify-center gap-4">
         <button type="button" className="mr-2" onClick={() => toggleShuffle()}>
           <MdShuffle
@@ -49,7 +69,7 @@ const Player: FC<IProps> = ({ activeSong }) => {
             } hover:opacity-100`}
           />
         </button>
-        <button type="button">
+        <button type="button" onClick={() => setPrevSong()}>
           <MdSkipPrevious className="text-white opacity-60 text-xl hover:opacity-100" />
         </button>
         {isPlaying ? (
@@ -61,7 +81,7 @@ const Player: FC<IProps> = ({ activeSong }) => {
             <MdOutlinePlayCircleFilled className="text-4xl hover:scale-110 transition-transform" />
           </button>
         )}
-        <button type="button">
+        <button type="button" onClick={() => setNextSong()}>
           <MdSkipNext className="text-white opacity-60 text-xl hover:opacity-100" />
         </button>
         <button type="button" className="ml-2" onClick={() => toggleRepeat()}>

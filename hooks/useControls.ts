@@ -7,7 +7,7 @@ import { IPlaylist } from "lib/interfaces";
 import { RootState } from "lib/store";
 import { useDispatch, useSelector } from "react-redux";
 
-const useControls = (playlist) => {
+export const useTableControls = (playlist) => {
   const { songs } = playlist;
 
   const dispatch = useDispatch();
@@ -38,5 +38,3 @@ const useControls = (playlist) => {
     activePlaylist,
   };
 };
-
-export default useControls;

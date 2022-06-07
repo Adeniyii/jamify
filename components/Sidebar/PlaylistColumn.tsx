@@ -1,5 +1,5 @@
 import { Playlist } from "@prisma/client";
-import { usePlaylist } from "../../lib/hooks";
+import { usePlaylist } from "lib/hooks";
 import ListItem from "./ListItem";
 
 const PlaylistColumn = () => {

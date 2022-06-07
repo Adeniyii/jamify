@@ -9,7 +9,7 @@ import {
 } from "react-icons/bs";
 import { formatDate, formatTime } from "lib/formatters";
 import { IPlaylist } from "lib/interfaces";
-import useControls from "hooks/useControls";
+import { useTableControls } from "hooks";
 
 interface IProps {
   playlist: IPlaylist;
@@ -24,7 +24,7 @@ const SongsTable: FC<IProps> = ({ playlist }) => {
     isCurrentPlaylist,
     handlePause,
     handlePlay,
-  } = useControls(playlist);
+  } = useTableControls(playlist);
 
   return (
     <>
