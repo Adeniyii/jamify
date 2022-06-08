@@ -6,7 +6,7 @@ import {
 import { IPlaylist } from "lib/interfaces";
 import { RootState } from "lib/store";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useRef, useState } from "react";
 import ReactHowler from "react-howler";
 
 export const useTableControls = (playlist) => {
@@ -44,19 +44,22 @@ export const useTableControls = (playlist) => {
 export const usePlayerControls = () => {
   const [shuffle, setShuffle] = useState(false);
   const [repeat, setRepeat] = useState(false);
-  const [index, setIndex] = useState(0);
   const [seek, setSeek] = useState(0);
   const [duration, setDuration] = useState(0.01);
 
+  const dispatch = useDispatch();
   const soundRef = useRef<ReactHowler>();
   const animationRef = useRef<number>();
+  const repeatRef = useRef(false);
 
-  const dispatch = useDispatch();
-  const { isPlaying, activePlaylist } = useSelector(
+  const { isPlaying, activePlaylist, activeSong } = useSelector(
     (state: RootState) => state.song
   );
 
   const { songs } = activePlaylist;
+  const [index, setIndex] = useState(() => {
+    return songs.findIndex((song) => song.id === activeSong.id);
+  });
 
   const setPlayState = (value: boolean) => {
     if (typeof value !== "boolean") return;
@@ -78,14 +81,14 @@ export const usePlayerControls = () => {
   const setNextSong = () => {
     if (shuffle) {
       const next = Math.floor(Math.random() * songs.length);
-      setIndex((i) => (i === next ? (next + 1) % songs.length : next));
+      setIndex((i) => (i === next ? next + 1 : next));
     } else {
       setIndex((i) => (i === songs.length - 1 ? 0 : i + 1));
     }
   };
 
   const onEnd = () => {
-    if (repeat) {
+    if (repeatRef.current) {
       setSeek(soundRef.current.seek(0));
       return;
     }
@@ -101,19 +104,28 @@ export const usePlayerControls = () => {
     soundRef.current.seek(values[0]);
   };
 
-  const animate = useCallback(() => {
-    if (isPlaying) {
-      setSeek(soundRef.current.seek());
-      animationRef.current = requestAnimationFrame(animate);
-    } else if (!isPlaying && animationRef.current) {
-      cancelAnimationFrame(animationRef.current);
-    }
+  // Handle updating UI seekbar
+  useEffect(() => {
+    const animate = () => {
+      if (isPlaying) {
+        setSeek(soundRef.current.seek());
+        animationRef.current = requestAnimationFrame(animate);
+      } else if (!isPlaying && animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
+    };
+
+    animationRef.current = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(animationRef.current);
   }, [isPlaying]);
 
   useEffect(() => {
-    animationRef.current = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(animationRef.current);
-  }, [animate, isPlaying]);
+    dispatch(changeActiveSong(songs[index]));
+  }, [dispatch, index, songs]);
+
+  useEffect(() => {
+    repeatRef.current = repeat;
+  }, [repeat]);
 
   return {
     seek,

@@ -77,7 +77,7 @@ const Player: FC<IProps> = ({ activeSong }) => {
         </button>
       </div>
       <div className="flex gap-4 items-center">
-        <p className="text-xs">1:12</p>
+        <p className="text-xs">{formatTime(seek)}</p>
         <Slider max={duration ?? 0.01} onSeek={onSeek} seek={seek} />
         <p className="text-xs">{formatTime(duration)}</p>
       </div>

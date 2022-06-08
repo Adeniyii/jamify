@@ -49,10 +49,10 @@ const Slider: FC<IProps> = ({ max, seek, onSeek }) => {
             className="flex items-center justify-center h-3 w-3 outline-none !cursor-pointer"
           >
             <div
-              className={`${
-                !isDragged && "hidden"
-              } h-3 w-3 bg-[#ccc] rounded-full group-hover:block ${
-                isDragged && "block"
+              className={`transition-transform ${
+                !isDragged && "scale-0"
+              } h-3 w-3 bg-[#ccc] rounded-full group-hover:scale-100 ${
+                isDragged && "scale-100"
               }`}
             />
           </div>
