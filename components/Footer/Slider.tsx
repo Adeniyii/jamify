@@ -42,20 +42,22 @@ const Slider: FC<IProps> = ({ max, seek, onSeek }) => {
           </div>
         </div>
       )}
-      renderThumb={({ props, isDragged }) => (
-        <div
-          {...props}
-          className="flex items-center justify-center h-3 w-3 outline-none !cursor-pointer"
-        >
+      renderThumb={({ props, isDragged }) => {
+        return (
           <div
-            className={`${
-              !isDragged && "hidden"
-            } h-3 w-3 bg-[#ccc] rounded-full group-hover:block ${
-              isDragged && "block"
-            }`}
-          />
-        </div>
-      )}
+            {...props}
+            className="flex items-center justify-center h-3 w-3 outline-none !cursor-pointer"
+          >
+            <div
+              className={`${
+                !isDragged && "hidden"
+              } h-3 w-3 bg-[#ccc] rounded-full group-hover:block ${
+                isDragged && "block"
+              }`}
+            />
+          </div>
+        );
+      }}
     />
   );
 };

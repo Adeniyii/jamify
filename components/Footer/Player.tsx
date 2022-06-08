@@ -27,6 +27,7 @@ const Player: FC<IProps> = ({ activeSong }) => {
   const [duration, setDuration] = useState(0.01);
 
   const soundRef = useRef<ReactHowler>();
+  const animationRef = useRef<number>();
 
   const dispatch = useDispatch();
   const { isPlaying, activePlaylist } = useSelector(
@@ -77,6 +78,20 @@ const Player: FC<IProps> = ({ activeSong }) => {
     setSeek(values[0]);
     soundRef.current.seek(values[0]);
   };
+
+  const animate = () => {
+    if (isPlaying) {
+      setSeek(soundRef.current.seek());
+    } else if (!isPlaying && animationRef.current) {
+      cancelAnimationFrame(animationRef.current);
+    }
+    animationRef.current = requestAnimationFrame(animate);
+  };
+
+  useEffect(() => {
+    animationRef.current = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(animationRef.current);
+  }, [isPlaying]); // Make sure the effect runs only once
 
   return (
     <div className="w-[500px] h-full flex flex-col justify-between">
