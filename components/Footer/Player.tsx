@@ -7,12 +7,11 @@ import {
   MdOutlineRepeat,
 } from "react-icons/md";
 import ReactHowler from "react-howler";
-import { useEffect, useRef, useState, FC } from "react";
+import { FC } from "react";
 import { Song } from "@prisma/client";
-import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "lib/store";
-import { togglePlay } from "lib/activeSongSlice";
+
 import { formatTime } from "lib/formatters";
+import { usePlayerControls } from "hooks/useControls";
 import Slider from "./Slider";
 
 interface IProps {
@@ -20,78 +19,22 @@ interface IProps {
 }
 
 const Player: FC<IProps> = ({ activeSong }) => {
-  const [shuffle, setShuffle] = useState(false);
-  const [repeat, setRepeat] = useState(false);
-  const [index, setIndex] = useState(0);
-  const [seek, setSeek] = useState(0);
-  const [duration, setDuration] = useState(0.01);
-
-  const soundRef = useRef<ReactHowler>();
-  const animationRef = useRef<number>();
-
-  const dispatch = useDispatch();
-  const { isPlaying, activePlaylist } = useSelector(
-    (state: RootState) => state.song
-  );
-
-  const { songs } = activePlaylist;
-
-  const setPlayState = (value: boolean) => {
-    if (typeof value !== "boolean") return;
-    dispatch(togglePlay());
-  };
-
-  const toggleShuffle = () => {
-    setShuffle((prev) => !prev);
-  };
-
-  const toggleRepeat = () => {
-    setRepeat((prev) => !prev);
-  };
-
-  const setPrevSong = () => {
-    setIndex((i) => (i ? i - 1 : songs.length - 1));
-  };
-
-  const setNextSong = () => {
-    if (shuffle) {
-      const next = Math.floor(Math.random() * songs.length);
-      setIndex((i) => (i === next ? (next + 1) % songs.length : next));
-    } else {
-      setIndex((i) => (i === songs.length - 1 ? 0 : i + 1));
-    }
-  };
-
-  const onEnd = () => {
-    if (repeat) {
-      setSeek(soundRef.current.seek(0));
-      return;
-    }
-    setNextSong();
-  };
-
-  const onLoad = () => {
-    setDuration(soundRef.current.duration());
-  };
-
-  const onSeek = (values: number[]) => {
-    setSeek(values[0]);
-    soundRef.current.seek(values[0]);
-  };
-
-  const animate = () => {
-    if (isPlaying) {
-      setSeek(soundRef.current.seek());
-    } else if (!isPlaying && animationRef.current) {
-      cancelAnimationFrame(animationRef.current);
-    }
-    animationRef.current = requestAnimationFrame(animate);
-  };
-
-  useEffect(() => {
-    animationRef.current = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(animationRef.current);
-  }, [isPlaying]); // Make sure the effect runs only once
+  const {
+    seek,
+    onEnd,
+    onLoad,
+    onSeek,
+    shuffle,
+    repeat,
+    duration,
+    isPlaying,
+    soundRef,
+    setPrevSong,
+    setNextSong,
+    setPlayState,
+    toggleShuffle,
+    toggleRepeat,
+  } = usePlayerControls();
 
   return (
     <div className="w-[500px] h-full flex flex-col justify-between">
