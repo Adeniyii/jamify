@@ -1,10 +1,13 @@
-import { useSelector } from "react-redux";
+import { shallowEqual, useSelector } from "react-redux";
 import React from "react";
 import { RootState } from "lib/store";
 import Player from "./Player";
 
 const Footer = () => {
-  const { activeSong } = useSelector((store: RootState) => store.song);
+  const activeSong = useSelector(
+    (store: RootState) => store.song.activeSong,
+    shallowEqual
+  );
 
   return (
     <div className="flex items-center h-full">

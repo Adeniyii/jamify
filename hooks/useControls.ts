@@ -5,7 +5,7 @@ import {
 } from "lib/activeSongSlice";
 import { IPlaylist } from "lib/interfaces";
 import { RootState } from "lib/store";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { useEffect, useRef, useState } from "react";
 import ReactHowler from "react-howler";
 
@@ -13,9 +13,12 @@ export const useTableControls = (playlist) => {
   const { songs } = playlist;
 
   const dispatch = useDispatch();
-  const { isPlaying, activePlaylist } = useSelector(
-    (state: RootState) => state.song
+  const activePlaylist = useSelector(
+    (state: RootState) => state.song.activePlaylist,
+    shallowEqual
   );
+
+  const isPlaying = useSelector((state: RootState) => state.song.isPlaying);
 
   const isCurrentPlaylist = (activePl: IPlaylist, newPl: IPlaylist) => {
     return activePl?.id === newPl.id;
@@ -52,9 +55,17 @@ export const usePlayerControls = () => {
   const animationRef = useRef<number>();
   const repeatRef = useRef(false);
 
-  const { isPlaying, activePlaylist, activeSong } = useSelector(
-    (state: RootState) => state.song
+  const activePlaylist = useSelector(
+    (state: RootState) => state.song.activePlaylist,
+    shallowEqual
   );
+
+  const activeSong = useSelector(
+    (state: RootState) => state.song.activeSong,
+    shallowEqual
+  );
+
+  const isPlaying = useSelector((state: RootState) => state.song.isPlaying);
 
   const { songs } = activePlaylist;
   const [index, setIndex] = useState(() => {
