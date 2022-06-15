@@ -2,27 +2,31 @@ import jwt from "jsonwebtoken";
 import cookie from "cookie";
 import { NextApiRequest, NextApiResponse } from "next";
 import bcrypt from "bcrypt";
-import prisma from "../../lib/prisma";
+import prisma from "lib/prisma";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const salt = bcrypt.genSaltSync();
-  const { email, password } = req.body;
+  const { email, password, firstName, lastName } = req.body;
 
   if (!email || !password)
     return res.status(400).json({ error: "Invalid request" });
 
   let user: {
-    email: any;
+    email: string;
     id?: number;
     createdAt?: Date;
     updatedAt?: Date;
     password?: string;
+    firstName: string;
+    lastName: string;
   };
 
   try {
     user = await prisma.user.create({
       data: {
         email,
+        firstName,
+        lastName,
         password: bcrypt.hashSync(password, salt),
       },
     });

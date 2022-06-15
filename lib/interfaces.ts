@@ -7,3 +7,8 @@ export interface ISong extends Song {
 export interface IPlaylist extends Playlist {
   songs: ISong[];
 }
+
+// export enum FormMode {
+//   SIGNIN = "signin",
+//   SIGNUP = "signup",
+// }
