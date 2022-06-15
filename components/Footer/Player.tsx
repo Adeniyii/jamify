@@ -8,14 +8,14 @@ import {
 } from "react-icons/md";
 import ReactHowler from "react-howler";
 import { FC } from "react";
-import { Song } from "@prisma/client";
 
 import { formatTime } from "lib/formatters";
 import { usePlayerControls } from "hooks/useControls";
+import { ISong } from "lib/interfaces";
 import Slider from "./Slider";
 
 interface IProps {
-  activeSong: Song;
+  activeSong: ISong;
 }
 
 const Player: FC<IProps> = ({ activeSong }) => {

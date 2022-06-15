@@ -1,6 +1,5 @@
 /* eslint-disable react/require-default-props */
 import React, { FC } from "react";
-import { Song } from "@prisma/client";
 import {
   BsClock,
   BsFillHeartFill,
@@ -55,7 +54,7 @@ const SongsTable: FC<IProps> = ({ playlist }) => {
           </tr>
         </thead>
         <tbody>
-          {songs.map((song: Song, i: number) => {
+          {songs.map((song, i: number) => {
             return (
               <tr
                 key={song.id}

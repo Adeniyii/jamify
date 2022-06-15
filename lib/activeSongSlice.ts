@@ -1,9 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Song } from "@prisma/client";
-import { IPlaylist } from "./interfaces";
+import { IPlaylist, ISong } from "./interfaces";
 
 export interface PlayerState {
-  activeSong: Song;
+  activeSong: ISong;
   activePlaylist: IPlaylist;
   isPlaying: boolean;
 }
@@ -18,7 +17,7 @@ export const songSlice = createSlice({
   name: "song",
   initialState,
   reducers: {
-    changeActiveSong: (state, action: PayloadAction<Song>) => {
+    changeActiveSong: (state, action: PayloadAction<ISong>) => {
       state.activeSong = action.payload;
     },
     changeActivePlaylist: (state, action: PayloadAction<IPlaylist>) => {

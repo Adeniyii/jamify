@@ -3,7 +3,7 @@ import {
   changeActivePlaylist,
   togglePlay,
 } from "lib/activeSongSlice";
-import { IPlaylist } from "lib/interfaces";
+import { IPlaylist, ISong } from "lib/interfaces";
 import { RootState } from "lib/store";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { useEffect, useRef, useState } from "react";
@@ -13,7 +13,7 @@ export const useTableControls = (playlist) => {
   const { songs } = playlist;
 
   const dispatch = useDispatch();
-  const activePlaylist = useSelector(
+  const activePlaylist: IPlaylist = useSelector(
     (state: RootState) => state.song.activePlaylist,
     shallowEqual
   );
@@ -28,7 +28,7 @@ export const useTableControls = (playlist) => {
     dispatch(togglePlay());
   };
 
-  const handlePlay = (song?) => {
+  const handlePlay = (song?: ISong) => {
     dispatch(changeActiveSong(song || songs[0]));
     if (!isCurrentPlaylist(activePlaylist, playlist))
       dispatch(changeActivePlaylist(playlist));
@@ -55,12 +55,12 @@ export const usePlayerControls = () => {
   const animationRef = useRef<number>();
   const repeatRef = useRef(false);
 
-  const activePlaylist = useSelector(
+  const activePlaylist: IPlaylist = useSelector(
     (state: RootState) => state.song.activePlaylist,
     shallowEqual
   );
 
-  const activeSong = useSelector(
+  const activeSong: ISong = useSelector(
     (state: RootState) => state.song.activeSong,
     shallowEqual
   );

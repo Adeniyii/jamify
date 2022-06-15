@@ -8,7 +8,7 @@ const PlaylistColumn = () => {
 
   return (
     <div className="overflow-y-auto h-full">
-      <ol className="flex flex-col gap-1 h-0">
+      <ol className="flex flex-col gap-1 h-0 mt-3">
         {playlists &&
           playlists.map((p: Playlist) => {
             return (

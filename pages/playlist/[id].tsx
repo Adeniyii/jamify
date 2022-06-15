@@ -4,6 +4,7 @@ import GradientLayout from "components/GradientLayout";
 import SongsTable from "components/SongsTable";
 import { validateToken } from "lib/auth";
 import prisma from "lib/prisma";
+import { IPlaylist } from "lib/interfaces";
 
 const colors = [
   "140deg",
@@ -23,7 +24,7 @@ type Props = {
 };
 
 const index: FC<Props> = ({ playlist }) => {
-  const playlistObj = JSON.parse(playlist);
+  const playlistObj: IPlaylist = JSON.parse(playlist);
   // console.log(playlistObj);
 
   return (
