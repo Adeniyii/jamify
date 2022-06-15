@@ -9,8 +9,12 @@ import { useRouter } from "next/router";
 import { auth } from "../../lib/mutations";
 
 const AuthForm: FC<{ mode: "signin" | "signup" }> = ({ mode }) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState(() =>
+    mode === "signin" ? "user@test.com" : ""
+  );
+  const [password, setPassword] = useState(() =>
+    mode === "signin" ? "password" : ""
+  );
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [loading, setLoading] = useState(false);
