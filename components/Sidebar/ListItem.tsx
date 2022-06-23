@@ -23,9 +23,9 @@ const ListItem: FC<Props> = ({ id, label, Icon, iconStyle, href }) => {
       >
         <a
           href="/home"
-          className="flex py-2 gap-3 -mx-4 px-4 items-center hover:bg-neutral-800 rounded-sm"
+          className="flex py-2 gap-4 -mx-4 px-4 items-center hover:bg-neutral-800 rounded-sm"
         >
-          {Icon && <Icon className={`h-6 w-6 ${iconStyle}`} />}
+          {Icon && <Icon className={`h-5 w-5 ${iconStyle}`} />}
           <span className="font-semibold text-xs text-neutral-300">
             {label}
           </span>
