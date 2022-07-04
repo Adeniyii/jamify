@@ -16,13 +16,13 @@ const Sidebar = () => {
       <PrimaryNav />
       <ol className="flex flex-col gap-1 my-3">
         <ListItem
-          href="/create"
+          href="/"
           label="Create Playlist"
           Icon={RiAddBoxFill}
           iconStyle="fill-green-700"
         />
         <ListItem
-          href="/liked"
+          href="/"
           label="Liked Songs"
           Icon={FcLike}
           iconStyle="stroke-neutral-300"

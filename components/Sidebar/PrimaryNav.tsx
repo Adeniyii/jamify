@@ -12,13 +12,13 @@ const PrimaryNav = () => {
         iconStyle="stroke-neutral-300"
       />
       <ListItem
-        href="/search"
+        href="/"
         label="Search"
         Icon={IoSearchOutline}
         iconStyle="stroke-neutral-300"
       />
       <ListItem
-        href="/library"
+        href="/"
         label="Your Library"
         Icon={BiLibrary}
         iconStyle="fill-neutral-300"
